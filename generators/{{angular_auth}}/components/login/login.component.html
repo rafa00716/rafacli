@@ -1,0 +1,51 @@
+<div class="login-container">
+  @if (authService.currentUser() === undefined ) {
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; font-size: 12px;">
+      <mat-spinner style="margin-bottom: 16px;" [strokeWidth]="3" [diameter]="64" mode="indeterminate"></mat-spinner>
+      Checking sesion....
+    </div>
+   } @else if(authService.currentUser() === null ) {
+     <mat-card>
+       <mat-card-header>
+         <mat-card-title>Login</mat-card-title>
+         <mat-card-subtitle>Access your account</mat-card-subtitle>
+       </mat-card-header>
+       <mat-card-content>
+         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+           <mat-form-field appearance="fill" class="full-width">
+             <mat-label>Email</mat-label>
+             <input matInput formControlName="email" type="email" required />
+             <mat-error>
+               {{ loginForm.get('email')?.invalid && loginForm.get('email')?.touched ? 'Please enter a valid email' : ''}}.
+             </mat-error>
+           </mat-form-field>
+   
+           <mat-form-field appearance="fill" class="full-width">
+             <mat-label>Password</mat-label>
+             <input matInput formControlName="password" type="password" required />
+             <mat-error>
+               {{ loginForm.get('password')?.invalid && loginForm.get('password')?.touched ? 'Password is required' : ''}}
+             </mat-error>
+           </mat-form-field>
+   
+           <button mat-raised-button class="full-width" color="primary" type="submit" [disabled]="loginForm.invalid || submiting">
+            <div style="width: 100%; display: flex; justify-content: center; align-items: center;">
+              {{ submiting ? 'Loging...' : 'Login'}}
+              <mat-spinner *ngIf="submiting"  [strokeWidth]="1" [diameter]="20" mode="indeterminate" style="margin-left: 16px;"></mat-spinner>
+            </div>
+           </button>
+         </form>
+       </mat-card-content>
+       <mat-card-actions [align]="'end'">
+         <button mat-button (click)="onForgotPassword()">Forgot Password?</button>
+       </mat-card-actions>
+     </mat-card>
+   } @else {
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; font-size: 12px;">
+      <mat-spinner style="margin-bottom: 16px;" [strokeWidth]="3" [diameter]="64" mode="indeterminate"></mat-spinner>
+      Loading sesion....
+    </div>
+   }
+
+</div>
+  
