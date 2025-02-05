@@ -1,6 +1,6 @@
 {
   "name": "rafacli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Project to create a generator cli to cruds, modules, etc..",
   "main": "index.js",
   "scripts": {
