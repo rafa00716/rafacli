@@ -1,0 +1,105 @@
+@if (error) {
+<app-error-loading></app-error-loading>
+} @else if(loading()){
+<app-loading title="Loading data...." />
+} @else {
+
+<div class="container_table">
+
+    <div class="search">
+        <input matInput [placeholder]="'Search ' + entitySingularName" [(ngModel)]="searchText"
+            (input)="searchListener.next(this.searchText)">
+
+        <div class="actions">
+            <button mat-icon-button matTooltip="Filter Reset"
+                (click)="searchText = ''; searchListener.next(this.searchText)">
+                <mat-icon>
+                    refresh
+                </mat-icon>
+            </button>
+            <button mat-icon-button [matTooltip]="'Create ' + entitySingularName" (click)="createRow()">
+                <mat-icon>
+                    add
+                </mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Donwload data" (click)="exportAsExcelFile()">
+                <mat-icon>
+                    download
+                </mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <table mat-table matSort aria-label="Elements" [dataSource]="dataSource" multiTemplateDataRows
+        matSortDirection="desc" matSortActive="name">
+        <!-- Id Column -->
+        @for (col of displayedColumns; track $index) {
+        <ng-container [matColumnDef]="col">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{getColumnTitle(col)}}</th>
+            <td mat-cell *matCellDef="let row">
+                <span [innerHTML]="getColumnCellContent(col, row)"></span>
+            </td>
+        </ng-container>
+        }
+
+        <ng-container matColumnDef="expand">
+            <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button
+                    (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
+                    @if (expandedElement === element) {
+                    <mat-icon>keyboard_arrow_up</mat-icon>
+                    } @else {
+                    <mat-icon>keyboard_arrow_down</mat-icon>
+                    }
+                </button>
+            </td>
+        </ng-container>
+
+        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+        <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let element" class="col-detail"
+                [ngClass]="{'expanded': expandedElement === element}"
+                [attr.colspan]="columnsToDisplayWithExpand.length">
+                <div class="element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                    <ng-container *ngTemplateOutlet="detail"></ng-container>
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsToDisplayWithExpand;" class="element-row"
+            [class.expanded-row]="expandedElement === row" (click)="editRow(row)"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" [attr.colspan]="columnsToDisplayWithExpand.length">
+                @if (!dataLoaded) {
+                <app-loading [title]="'Loading ' + entityPluralName + ' ....'" />
+                } @else {
+                    No results
+                }
+            </td>
+        </tr>
+
+    </table>
+
+    <mat-paginator #paginator [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" aria-label="Select page">
+    </mat-paginator>
+</div>
+}
+
+
+
+<ng-template #detail>
+    <mat-card *ngIf="expandedElement" class="w_full pd-2">
+        <mat-card-title>Detalle del {{entitySingularName}} {{expandedElement.name}}</mat-card-title>
+        <mat-card-content>
+            <div class="flex wrap space-x-4">
+                <div class="mg-t-4" *ngFor="let property of getJsonRowDetail(expandedElement) | keyvalue : keepSort">
+                    <strong>{{property.key}}:&nbsp;</strong>
+                    <span [innerHTML]="property.value"></span>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</ng-template>

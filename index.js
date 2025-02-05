@@ -143,9 +143,9 @@ async function copyAndModifyDir(src, dest, replacements) {
   }
 }
 
-const replacements = (value, name) => {
+const replacements = (generatorOption, name) => {
   return { 
-    [`{{${value}}}`]: name, 
+    [`{{${generatorOption}}}`]: toKebabCase(name), 
     [`{{camelCase}}`]: toCamelCase(name),
     [`{{kebabCase}}`]: toKebabCase(name),
     [`{{classCase}}`]: toClassCase(name), 

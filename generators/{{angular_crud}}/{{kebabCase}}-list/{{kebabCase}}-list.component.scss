@@ -1,0 +1,103 @@
+.container_table {
+    padding: 8px;
+    border-radius: $border-standard;
+
+    .search {
+        border-radius: $border-standard;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px;
+        background-color: $bg-components;
+        input {
+            border: none;
+            border-radius: $border-standard;
+            background-color: $bg-components;
+            outline-style: none;
+            width: 50%;
+            margin-left: 16px;
+        }
+    }
+
+    table {
+        border-radius: $border-standard;
+        overflow-x: auto;
+        width: 100%;
+        max-width: 90vw;
+        tr,
+        th,
+        td {
+            border: none;
+            height: fit-content;
+            padding-bottom: 5px !important;
+            padding-top: 5px !important;
+        }
+
+        [mat-header-row] {
+            border-bottom: solid gray 1px;
+            :first-child {
+                border-top-left-radius: $border-standard;
+            }
+
+            :last-child {
+                border-top-right-radius: $border-standard;
+            }
+        }
+
+        [mat-row],
+        .mat-row {
+            cursor: pointer;
+
+            &:last-child {
+                :first-child {
+                    border-bottom-left-radius: $border-standard;
+                }
+
+                :last-child {
+                    border-bottom-right-radius: $border-standard;
+                }
+            }
+
+            &:nth-child(even) {
+                background-color: rgb(233, 240, 239);
+            }
+
+            &:hover {
+                background-color: rgb(202, 204, 204);
+            }
+
+            &.detail-row {
+                height: 0 !important;
+            }
+        }
+
+        .mat-mdc-no-data-row {
+            height: 64px;
+            width: 100%;
+            border-radius: $border-standard;
+            text-align: center;
+        }
+
+        .col-detail {
+            &:not(.expanded) {
+                padding: 0px !important;
+                height: 0px !important;
+                .element-detail {
+                    display: none;
+                }
+            }
+            .element-detail {
+                overflow: hidden;
+                display: flex;
+            }
+        }
+
+    }
+
+    mat-paginator {
+        margin-top: 8px;
+        border-radius: $border-standard;
+        min-height: none;
+    }
+}

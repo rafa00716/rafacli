@@ -24,5 +24,6 @@
     "figlet": "^1.8.0",
     "inquirer": "^12.4.1"
   },
-  "type": "module"
+  "type": "module",
+  "bin": "./index.js"
 }
