@@ -4,9 +4,7 @@ import { {{classCase}}Controller } from './{{kebabCase}}.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { {{classCase}} } from './entities/{{kebabCase}}.entity';
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([{{classCase}}]),
-  ],
+  imports: [TypeOrmModule.forFeature([{{classCase}}])],
   controllers: [{{classCase}}Controller],
   providers: [{{classCase}}Service],
 })

@@ -32,21 +32,18 @@ export class {{classCase}}Service {
       }
     }
 
-    const rowCreated: Client = this.repository.create(createDtoObject);
+    const rowCreated: {{classCase}} = this.repository.create(createDtoObject);
 
     return this.repository.save(rowCreated);
-
   }
 
-  async createMany(
-    createDtoObjects: CreateDtoClass[]
-  ) {
+  async createMany(createDtoObjects: CreateDtoClass[]) {
     const created: {{classCase}}[] = [];
     const nonCreated: { row: CreateDtoClass; error: any }[] = [];
 
     for (const dtoObject of createDtoObjects) {
       try {
-        const rowCreated = await this.create(dtoObject, createUispToo);
+        const rowCreated = await this.create(dtoObject);
         created.push(rowCreated);
       } catch (error) {
         console.log(error);
@@ -77,9 +74,11 @@ export class {{classCase}}Service {
       newEntries.push([key, value]);
     });
 
-    const where: FindOptionsWhere<{{classCase}}>[] = newEntries.map(([key, value]) => {
+    const where: FindOptionsWhere<{{classCase}}>[] = newEntries.map(
+      ([key, value]) => {
         return { [key]: ILike(`%${String(value).trim()}%`) };
-    });
+      },
+    );
 
     const [dataSource, length] = await this.repository.findAndCount({
       take: take ?? 10,
@@ -131,7 +130,7 @@ export class {{classCase}}Service {
     if (!rowFound) {
       ErrorHandler.notFoundEntry(this.subjectName);
     }
-    
+
     return this.repository.remove(rowFound);
   }
 }

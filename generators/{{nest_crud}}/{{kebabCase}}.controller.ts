@@ -21,12 +21,12 @@ export class {{classCase}}Controller {
 
   @Post()
   create(@Body() create{{classCase}}Dto: Create{{classCase}}Dto) {
-    return this.{{camelCase}}Service.create(create{{classCase}}Dto, true);
+    return this.{{camelCase}}Service.create(create{{classCase}}Dto);
   }
 
   @Post('create-many')
   createMany(@Body() create{{classCase}}Dto: Create{{classCase}}Dto[]) {
-    return this.{{camelCase}}Service.createMany(create{{classCase}}Dto, true);
+    return this.{{camelCase}}Service.createMany(create{{classCase}}Dto);
   }
 
   @Get()
