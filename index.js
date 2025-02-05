@@ -83,7 +83,7 @@ const run = async () => {
   const { name, generator_option, path } = await inquiries();
 
   copyAndModifyDir(
-    `${process.cwd()}/generators/{{${generator_option}}}`,
+    `${__dirname}/generators/{{${generator_option}}}`,
     `${process.cwd()}/${path}/${toKebabCase(name)}`,
     replacements(generator_option, name)
   )
