@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { httpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environments';
 import { {{classCase}}Interface } from './{{kebabCase}}.interface';
@@ -14,7 +14,7 @@ export class {{classCase}}Service {
   private readonly urlBase = environment.url; // change this urlBase to you url api
   private readonly route = '{{camelCase}}';
 
-  constructor(private http: httpClient) {}
+  constructor(private http: HttpClient) {}
 
   getOne(id: string | number): Observable<{{classCase}}Interface> {
     return this.http.get<{{classCase}}Interface>(

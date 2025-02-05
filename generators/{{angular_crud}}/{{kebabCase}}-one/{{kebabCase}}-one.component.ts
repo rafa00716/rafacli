@@ -80,7 +80,7 @@ export class {{classCase}}OneComponent implements OnInit {
   }
 
   loading() {
-    return !this.cities || !this.services || (!this.isNew() && !this.{{camelCase}});
+    return (!this.isNew() && !this.{{camelCase}});
   }
 
   isNew() {
@@ -95,7 +95,7 @@ export class {{classCase}}OneComponent implements OnInit {
     this.{{camelCase}}Service.getOne(this.{{camelCase}}Id).subscribe({
       next: ({{camelCase}}) => {
         this.{{camelCase}} = {{camelCase}};
-        this.{{camelCase}}Form.patchValue({...{{camelCase}}, cityId: {{camelCase}}.city.id});
+        this.{{camelCase}}Form.patchValue({{camelCase}});
         this.{{camelCase}}FormOriginal = this.{{camelCase}}Form.value;
       },
       error: (error) => {

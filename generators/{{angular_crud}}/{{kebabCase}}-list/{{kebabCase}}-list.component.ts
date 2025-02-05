@@ -171,7 +171,7 @@ export class {{classCase}}ListComponent implements AfterViewInit {
     row: {{classCase}}Interface
   ) {
     switch (colKey) {
-      case 'fullName':
+      case 'name':
         return `${row['name']}`;
       case 'createdAt':
         return moment(row[colKey]).format('YYYY-MM-DD');;
