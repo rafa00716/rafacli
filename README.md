@@ -1,51 +1,36 @@
-# rafacli
-Project to create a generator cli to cruds, modules, etc..
+# Rafacli - NestJS & Angular Generator CLI
 
-### Init NPM to create package.json
+`rafacli` is a command-line tool designed to generate authentication and CRUD modules (*and more soon*) for NestJS and Angular applications. It streamlines the development process by automating boilerplate code creation, reducing repetitive tasks, and ensuring consistency across projects.
 
-```
-npm init
-```
+## Features
 
-- ### Add propertys values and verify package.json result
+- 🔒 **Authentication Module**: Quickly generate authentication logic for NestJS and Angular.
+- 📦 **CRUD Module Generator**: Create fully functional CRUD operations with TypeORM integration.
+- ⚡ **Fast and Scalable**: Designed for efficient development with clean and structured code.
+- 🛠️ **Customizable**: Supports different configurations to adapt to various project needs.
 
-```
-{
-  "name": "rafacli",
-  "version": "1.0.0",
-  "description": "Project to create a generator cli to cruds, modules, etc..",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rafa00716/rafacli.git"
-  },
-  "keywords": [
-    "cli",
-    "generator",
-    "cruds",
-    "modules"
-  ],
-  "author": "Luis Rafael Mendez <rafa00716@gmail.com>",
-  "license": "MIT"
-}
+## Installation
+
+To install `rafacli` globally, run:
+
+```sh
+npm install -g rafacli
 ```
 
-### Install dependences
+## Usage
+```sh
+rafacli
+```
 
-```
-npm i chalk inquirer figlet shelljs
-```
+## Contributing
 
-- ### Check new dependences
+Contributions are welcome! Feel free to open issues and submit pull requests to improve `rafacli`.
 
-```
-  "dependencies": {
-    "chalk": "^5.4.1",
-    "figlet": "^1.8.0",
-    "inquirer": "^12.4.1"
-  }
-```
+## License
+
+MIT License. See [LICENSE](LICENSE) for details.
+
+---
+
+🚀 **Speed up your NestJS & Angular development with `rafacli`!**
 
