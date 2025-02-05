@@ -36,6 +36,9 @@ npm i
 npm run start
 ```
 
+## Output Console
+
+![image](https://github.com/user-attachments/assets/9ee50d91-e47b-4c33-9a67-6f6ab7a1ab32)
 
 ## Contributing
 
