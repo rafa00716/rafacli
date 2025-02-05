@@ -11,16 +11,31 @@
 
 ## Installation
 
-To install `rafacli` globally, run:
+### To install `rafacli` globally, run:
 
 ```sh
 npm install -g rafacli
 ```
 
-## Usage
+- #### Run the comand
 ```sh
 rafacli
 ```
+
+### To use locally, run:
+
+- #### Clone repe & install it
+```sh
+git clone https://github.com/rafa00716/rafacli.git
+cd rafacli
+npm i
+```
+- #### Run the package script
+
+```sh
+npm run start
+```
+
 
 ## Contributing
 
