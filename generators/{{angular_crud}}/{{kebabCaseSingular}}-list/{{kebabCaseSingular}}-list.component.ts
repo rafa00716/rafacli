@@ -6,8 +6,8 @@ import {
 } from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSortModule, MatSort } from '@angular/material/sort';
-import { {{classCase}}Interface } from '../{{kebabCase}}.interface';
-import { {{classCase}}Service } from '../{{kebabCase}}.service';
+import { {{classCaseSingular}}Interface } from '../{{kebabCaseSingular}}.interface';
+import { {{classCaseSingular}}Service } from '../{{kebabCaseSingular}}.service';
 import { SharedModule } from '../../../shared/shared.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -26,9 +26,9 @@ import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import { LayoutService } from '../../layout/layout.service';
 import { MatCardModule } from '@angular/material/card';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import {animate, state, style, transition, trigger} from '@angular/animations';
 @Component({
-  selector: 'app-{{kebabCase}}-list',
+  selector: 'app-{{kebabCaseSingular}}-list',
   standalone: true,
   imports: [
     MatTableModule,
@@ -42,21 +42,26 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     MatTooltipModule,
     CommonModule,
     FormsModule,
-    MatCardModule,
-    BrowserAnimationsModule
-    
+    MatCardModule,    
   ],
-  templateUrl: './{{kebabCase}}-list.component.html',
-  styleUrl: './{{kebabCase}}-list.component.scss',
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed,void', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
+  templateUrl: './{{kebabCaseSingular}}-list.component.html',
+  styleUrl: './{{kebabCaseSingular}}-list.component.scss',
 })
-export class {{classCase}}ListComponent implements AfterViewInit {
+export class {{classCaseSingular}}ListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable<{{classCase}}Interface>;
-  dataSource = new MatTableDataSource<{{classCase}}Interface>(undefined);
-  dataLoaded: {{classCase}}Interface[] | null = null;
+  @ViewChild(MatTable) table!: MatTable<{{classCaseSingular}}Interface>;
+  dataSource = new MatTableDataSource<{{classCaseSingular}}Interface>(undefined);
+  dataLoaded: {{classCaseSingular}}Interface[] | null = null;
   readonly dialog = inject(MatDialog);
-  {{camelCase}}Selected: string | undefined;
+  {{camelCaseSingular}}Selected: string | undefined;
   isHandset$!: boolean;
 
   get displayedColumns(): any {
@@ -65,33 +70,33 @@ export class {{classCase}}ListComponent implements AfterViewInit {
       : this.displayedColumnsDesktop;
   }
 
-  displayedColumnsHandset: (keyof {{classCase}}Interface)[] = [
+  displayedColumnsHandset: (keyof {{classCaseSingular}}Interface)[] = [
     'name',
   ];
 
-  displayedColumnsDesktop: (keyof {{classCase}}Interface)[] = [
+  displayedColumnsDesktop: (keyof {{classCaseSingular}}Interface)[] = [
     'name',
   ];
 
-  displayedColumnsDetail: (keyof {{classCase}}Interface)[] = [
+  displayedColumnsDetail: (keyof {{classCaseSingular}}Interface)[] = [
     'name',
   ];
 
-  keysToFilter: (keyof {{classCase}}Interface)[] = [
+  keysToFilter: (keyof {{classCaseSingular}}Interface)[] = [
     'name',
   ];
 
-  keysToSort: (keyof {{classCase}}Interface)[] = [
+  keysToSort: (keyof {{classCaseSingular}}Interface)[] = [
     'name',
   ];
 
   get columnsToDisplayWithExpand() {
     return [...this.displayedColumns, 'expand'];
   }
-  expandedElement!: {{classCase}}Interface | null;
+  expandedElement!: {{classCaseSingular}}Interface | null;
 
-  entitySingularName = '{{camelCase}}';
-  entityPluralName = '{{camelCase}}';
+  entitySingularName = '{{camelCaseSingular}}';
+  entityPluralName = '{{camelCasePlural}}';
   searchText = '';
   searchListener = new BehaviorSubject<string>('');
   subscriptions: Subscription[] = [];
@@ -103,7 +108,7 @@ export class {{classCase}}ListComponent implements AfterViewInit {
   }
 
   constructor(
-    private {{camelCase}}Service: {{classCase}}Service,
+    private {{camelCaseSingular}}Service: {{classCaseSingular}}Service,
     private router: Router,
     private layoutService: LayoutService
   ) {
@@ -137,7 +142,7 @@ export class {{classCase}}ListComponent implements AfterViewInit {
   loadData() {
     this.dataSource.data = null as any;
     this.dataLoaded = null as any;
-    this.{{camelCase}}Service.getPaginated(this.getPaginatedReq()).subscribe({
+    this.{{camelCaseSingular}}Service.getPaginated(this.getPaginatedReq()).subscribe({
       next: (resp) => {
         this.dataLoaded = resp.dataSource;
         this.dataSource.data = resp.dataSource;
@@ -153,7 +158,7 @@ export class {{classCase}}ListComponent implements AfterViewInit {
 
   keepSort = (): number => 0;
 
-  getColumnTitle(colKey: keyof {{classCase}}Interface) {
+  getColumnTitle(colKey: keyof {{classCaseSingular}}Interface) {
     switch (colKey) {
       case 'name':
         return 'Name';
@@ -167,8 +172,8 @@ export class {{classCase}}ListComponent implements AfterViewInit {
   }
 
   getColumnCellContent(
-    colKey: keyof {{classCase}}Interface,
-    row: {{classCase}}Interface
+    colKey: keyof {{classCaseSingular}}Interface,
+    row: {{classCaseSingular}}Interface
   ) {
     switch (colKey) {
       case 'name':
@@ -190,12 +195,12 @@ export class {{classCase}}ListComponent implements AfterViewInit {
   }
 
   createRow() {
-    this.router.navigate([`app/{{kebabCase}}/create`]);
+    this.router.navigate([`app/{{kebabCaseSingular}}/create`]);
   }
 
-  editRow(row: {{classCase}}Interface) {
-    this.{{camelCase}}Selected = row.id;
-    this.router.navigate([`app/{{kebabCase}}/edit/${this.{{camelCase}}Selected}`]);
+  editRow(row: {{classCaseSingular}}Interface) {
+    this.{{camelCaseSingular}}Selected = row.id;
+    this.router.navigate([`app/{{kebabCaseSingular}}/edit/${this.{{camelCaseSingular}}Selected}`]);
   }
 
   stripHtml(html: string): string {
@@ -204,8 +209,8 @@ export class {{classCase}}ListComponent implements AfterViewInit {
     return tempDiv.innerText.trim();
   }
 
-  getJsonRow(row: {{classCase}}Interface) {
-    const keys = Object.keys(row) as (keyof {{classCase}}Interface)[];
+  getJsonRow(row: {{classCaseSingular}}Interface) {
+    const keys = Object.keys(row) as (keyof {{classCaseSingular}}Interface)[];
     const newRow: any = {};
     keys.forEach((key) => {
       if (this.displayedColumnsDesktop.includes(key)) {
@@ -218,8 +223,8 @@ export class {{classCase}}ListComponent implements AfterViewInit {
     return newRow;
   }
 
-  getJsonRowDetail(row: {{classCase}}Interface) {
-    const keys = Object.keys(row) as (keyof {{classCase}}Interface)[];
+  getJsonRowDetail(row: {{classCaseSingular}}Interface) {
+    const keys = Object.keys(row) as (keyof {{classCaseSingular}}Interface)[];
     const newRow: any = {};
     keys.forEach((key) => {
       if (this.displayedColumnsDetail.includes(key)) {
@@ -233,7 +238,7 @@ export class {{classCase}}ListComponent implements AfterViewInit {
 
   exportAsExcelFile(): void {
     const data = this.dataSource.data.map((row) => {
-      const keys = Object.keys(row) as (keyof {{classCase}}Interface)[];
+      const keys = Object.keys(row) as (keyof {{classCaseSingular}}Interface)[];
       const newRow: any = {};
       keys.forEach((key) => {
         if (this.displayedColumns.includes(key)) {

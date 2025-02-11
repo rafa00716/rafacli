@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environments';
-import { {{classCase}}Interface } from './{{kebabCase}}.interface';
+import { {{classCaseSingular}}Interface } from './{{kebabCaseSingular}}.interface';
 import {
   PaginatedRequestInterface,
   PaginatedResponse,
@@ -10,46 +10,46 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class {{classCase}}Service {
+export class {{classCaseSingular}}Service {
   private readonly urlBase = environment.url; // change this urlBase to you url api
-  private readonly route = '{{camelCase}}';
+  private readonly route = '{{kebabCasePlural}}';
 
   constructor(private http: HttpClient) {}
 
-  getOne(id: string | number): Observable<{{classCase}}Interface> {
-    return this.http.get<{{classCase}}Interface>(
+  getOne(id: string | number): Observable<{{classCaseSingular}}Interface> {
+    return this.http.get<{{classCaseSingular}}Interface>(
       `${this.urlBase}/${this.route}/${id}`
     );
   }
 
-  getAll(): Observable<{{classCase}}Interface[]> {
-    return this.http.get<{{classCase}}Interface[]>(`${this.urlBase}/${this.route}`);
+  getAll(): Observable<{{classCaseSingular}}Interface[]> {
+    return this.http.get<{{classCaseSingular}}Interface[]>(`${this.urlBase}/${this.route}`);
   }
 
   getPaginated(
     paginatedRequest: PaginatedRequestInterface
-  ): Observable<PaginatedResponse<{{classCase}}Interface>> {
+  ): Observable<PaginatedResponse<{{classCaseSingular}}Interface>> {
     const params = new HttpParams({ fromObject: paginatedRequest });
-    return this.http.get<PaginatedResponse<{{classCase}}Interface>>(
+    return this.http.get<PaginatedResponse<{{classCaseSingular}}Interface>>(
       `${this.urlBase}/${this.route}/paginated`,
       { params }
     );
   }
 
-  create({{camelCase}}: {{classCase}}Interface): Observable<{{classCase}}Interface> {
-    return this.http.post<{{classCase}}Interface>(
+  create({{camelCaseSingular}}: {{classCaseSingular}}Interface): Observable<{{classCaseSingular}}Interface> {
+    return this.http.post<{{classCaseSingular}}Interface>(
       `${this.urlBase}/${this.route}`,
-      {{camelCase}}
+      {{camelCaseSingular}}
     );
   }
 
   update(
     id: string | number,
-    {{camelCase}}: {{classCase}}Interface
-  ): Observable<{{classCase}}Interface> {
-    return this.http.patch<{{classCase}}Interface>(
+    {{camelCaseSingular}}: {{classCaseSingular}}Interface
+  ): Observable<{{classCaseSingular}}Interface> {
+    return this.http.patch<{{classCaseSingular}}Interface>(
       `${this.urlBase}/${this.route}/${id}`,
-      {{camelCase}}
+      {{camelCaseSingular}}
     );
   }
 

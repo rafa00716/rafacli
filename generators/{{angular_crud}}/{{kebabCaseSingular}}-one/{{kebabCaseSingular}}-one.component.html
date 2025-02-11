@@ -1,18 +1,18 @@
 <mat-card>
-    <mat-card-title>{{isNew()? 'Create' : 'Edit'}} {{camelCase}}</mat-card-title>
+    <mat-card-title>{{isNew()? 'Create' : 'Edit'}} {{camelCaseSingular}}</mat-card-title>
     <mat-card-content>
         @if (error) {
         <app-error-loading></app-error-loading>
         } @else if(loading()){
             <app-loading title="Loading data...." />
         } @else {
-            <form [formGroup]="{{camelCase}}Form">
+            <form [formGroup]="{{camelCaseSingular}}Form">
                 <div class="wrap-grid">    
                     <div class="form-field">
                         <mat-form-field appearance="fill">
                             <mat-label>Name</mat-label>
                             <input matInput formControlName="name" />
-                            <mat-error *ngIf="{{camelCase}}Form.get('name')?.hasError('required')">The name is mandatory</mat-error>
+                            <mat-error *ngIf="{{camelCaseSingular}}Form.get('name')?.hasError('required')">The name is mandatory</mat-error>
                         </mat-form-field>
                     </div>
     
@@ -34,7 +34,7 @@
                <div class="flex center space-x-2">
                    <mat-spinner [diameter]="18"></mat-spinner>
                    <span>
-                       {{ this.isNew() ? 'Creating {{camelCase}}...' : 'Updating {{camelCase}}...' }}
+                       {{ this.isNew() ? 'Creating {{camelCaseSingular}}...' : 'Updating {{camelCaseSingular}}...' }}
                    </span>
                </div>
             </button>
@@ -44,7 +44,7 @@
                 <mat-icon>
                     {{ this.isNew() ? 'save' : 'update' }}
                 </mat-icon>
-                {{ this.isNew() ? 'Create {{camelCase}}' : 'Update {{camelCase}}' }}
+                {{ this.isNew() ? 'Create {{camelCaseSingular}}' : 'Update {{camelCaseSingular}}' }}
             </button>
         }
 

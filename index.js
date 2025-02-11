@@ -66,10 +66,16 @@ const inquiries = () => {
       required: true,
     },
     {
-      name: "name",
+      name: "singularName",
       type: "input",
-      message: "Write a name for you choice",
+      message: "Write a singular name for you choice",
       required: true,
+    },
+    {
+      name: "pluralName",
+      type: "input",
+      message: "Write a plurar name for you choice (deafult singular name choice)",
+      required: false,
     },
     {
       name: "path",
@@ -84,14 +90,14 @@ const inquiries = () => {
 
 const run = async () => {
   init();
-  const { name, generator_option, path } = await inquiries();
+  const { singularName, pluralName, generator_option, path } = await inquiries();
 
   copyAndModifyDir(
     `${__dirname}/generators/{{${generator_option}}}`,
-    `${process.cwd()}/${path}/${toKebabCase(name)}`,
-    replacements(generator_option, name)
+    `${process.cwd()}/${path}/${toKebabCase(pluralName)}`,
+    replacements(generator_option, singularName, pluralName)
   )
-    .then(() => successfullProcess(generator_option, name, path))
+    .then(() => successfullProcess(generator_option, pluralName, path))
     .catch(console.error);
 };
 
@@ -147,12 +153,15 @@ async function copyAndModifyDir(src, dest, replacements) {
   }
 }
 
-const replacements = (generatorOption, name) => {
+const replacements = (generatorOption, singularName, pluralName) => {
   return { 
-    [`{{${generatorOption}}}`]: toKebabCase(name), 
-    [`{{camelCase}}`]: toCamelCase(name),
-    [`{{kebabCase}}`]: toKebabCase(name),
-    [`{{classCase}}`]: toClassCase(name), 
+    [`{{${generatorOption}}}`]: toKebabCase(pluralName), 
+    [`{{camelCaseSingular}}`]: toCamelCase(singularName),
+    [`{{kebabCaseSingular}}`]: toKebabCase(singularName),
+    [`{{classCaseSingular}}`]: toClassCase(singularName), 
+    [`{{camelCasePlural}}`]: toCamelCase(pluralName),
+    [`{{kebabCasePlural}}`]: toKebabCase(pluralName),
+    [`{{classCasePlural}}`]: toClassCase(pluralName), 
 };
 };
 

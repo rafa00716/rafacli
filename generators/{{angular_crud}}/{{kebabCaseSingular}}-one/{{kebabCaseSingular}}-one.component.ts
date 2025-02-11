@@ -9,8 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, Router } from '@angular/router';
-import { {{classCase}}Service } from '../{{kebabCase}}.service';
-import { {{classCase}}Interface } from '../{{kebabCase}}.interface';
+import { {{classCaseSingular}}Service } from '../{{kebabCaseSingular}}.service';
+import { {{classCaseSingular}}Interface } from '../{{kebabCaseSingular}}.interface';
 import { CommonModule } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
@@ -26,7 +26,7 @@ import { compareSamePropertys } from '../../../utils/utils';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @Component({
-  selector: 'app-{{kebabCase}}-one',
+  selector: 'app-{{kebabCaseSingular}}-one',
   standalone: true,
   imports: [
     CommonModule,
@@ -49,14 +49,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     },
     { provide: MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS },
   ],
-  templateUrl: './{{kebabCase}}-one.component.html',
-  styleUrl: './{{kebabCase}}-one.component.scss',
+  templateUrl: './{{kebabCaseSingular}}-one.component.html',
+  styleUrl: './{{kebabCaseSingular}}-one.component.scss',
 })
-export class {{classCase}}OneComponent implements OnInit {
-  {{camelCase}}Form: FormGroup;
-  {{camelCase}}Id: string | undefined;
-  {{camelCase}}: {{classCase}}Interface | undefined;
-  {{camelCase}}FormOriginal: Partial<{{classCase}}Interface> | undefined;
+export class {{classCaseSingular}}OneComponent implements OnInit {
+  {{camelCaseSingular}}Form: FormGroup;
+  {{camelCaseSingular}}Id: string | undefined;
+  {{camelCaseSingular}}: {{classCaseSingular}}Interface | undefined;
+  {{camelCaseSingular}}FormOriginal: Partial<{{classCaseSingular}}Interface> | undefined;
   submiting = false;
   error = null;
   private _snackBar = inject(MatSnackBar);
@@ -64,39 +64,39 @@ export class {{classCase}}OneComponent implements OnInit {
     private fb: FormBuilder,
     private activateRouter: ActivatedRoute,
     private router: Router,
-    private {{camelCase}}Service: {{classCase}}Service,
+    private {{camelCaseSingular}}Service: {{classCaseSingular}}Service,
     private datalayerService: DatalayerService
   ) {
     const param = this.activateRouter.snapshot.paramMap.get('id');
 
-    this.{{camelCase}}Form = this.fb.group({
+    this.{{camelCaseSingular}}Form = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(50)]],
     });
 
     if (param) {
-      this.{{camelCase}}Id = param;
-      this.load{{classCase}}();
+      this.{{camelCaseSingular}}Id = param;
+      this.load{{classCaseSingular}}();
     }
   }
 
   loading() {
-    return (!this.isNew() && !this.{{camelCase}});
+    return (!this.isNew() && !this.{{camelCaseSingular}});
   }
 
   isNew() {
-    return !this.{{camelCase}}Id;
+    return !this.{{camelCaseSingular}}Id;
   }
 
-  load{{classCase}}() {
-    if (!this.{{camelCase}}Id) {
+  load{{classCaseSingular}}() {
+    if (!this.{{camelCaseSingular}}Id) {
       return;
     }
 
-    this.{{camelCase}}Service.getOne(this.{{camelCase}}Id).subscribe({
-      next: ({{camelCase}}) => {
-        this.{{camelCase}} = {{camelCase}};
-        this.{{camelCase}}Form.patchValue({{camelCase}});
-        this.{{camelCase}}FormOriginal = this.{{camelCase}}Form.value;
+    this.{{camelCaseSingular}}Service.getOne(this.{{camelCaseSingular}}Id).subscribe({
+      next: ({{camelCaseSingular}}) => {
+        this.{{camelCaseSingular}} = {{camelCaseSingular}};
+        this.{{camelCaseSingular}}Form.patchValue({{camelCaseSingular}});
+        this.{{camelCaseSingular}}FormOriginal = this.{{camelCaseSingular}}Form.value;
       },
       error: (error) => {
         this.error = error;
@@ -110,28 +110,28 @@ export class {{classCase}}OneComponent implements OnInit {
   enableButtonSave() {
     return (
       !this.submiting &&
-      !this.{{camelCase}}Form.invalid &&
-      !compareSamePropertys(this.{{camelCase}}Form.value, this.{{camelCase}}FormOriginal)
+      !this.{{camelCaseSingular}}Form.invalid &&
+      !compareSamePropertys(this.{{camelCaseSingular}}Form.value, this.{{camelCaseSingular}}FormOriginal)
     );
   }
 
   cancel() {
-    this.router.navigate(['app/{{kebabCase}}']);
+    this.router.navigate(['app/{{kebabCaseSingular}}']);
   }
 
   submit() {
-    const value = this.{{camelCase}}Form.value;
+    const value = this.{{camelCaseSingular}}Form.value;
 
     if (value.ci) {
       value.ci = value.ci.trim().replace(/\./g, "");
     }
 
     this.submiting = true;
-    this.{{camelCase}}Form.disable();
+    this.{{camelCaseSingular}}Form.disable();
 
     const action = this.isNew()
-    ? this.{{camelCase}}Service.create(value)
-    : this.{{camelCase}}Service.update(this.{{camelCase}}Id!, value);
+    ? this.{{camelCaseSingular}}Service.create(value)
+    : this.{{camelCaseSingular}}Service.update(this.{{camelCaseSingular}}Id!, value);
     
     action.subscribe({
       next: (resp) => {
@@ -149,7 +149,7 @@ export class {{classCase}}OneComponent implements OnInit {
     this.loadPreData();
 
     if (!this.isNew()) {
-      this.{{camelCase}}Form.controls['serviceId'].disable();
+      this.{{camelCaseSingular}}Form.controls['serviceId'].disable();
     }
   }
 }

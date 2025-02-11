@@ -1,23 +1,23 @@
 import { Injectable } from '@nestjs/common';
-import { Create{{classCase}}Dto } from './dto/create-{{kebabCase}}.dto';
-import { Update{{classCase}}Dto } from './dto/update-{{kebabCase}}.dto';
+import { Create{{classCaseSingular}}Dto } from './dto/create-{{kebabCaseSingular}}.dto';
+import { Update{{classCaseSingular}}Dto } from './dto/update-{{kebabCaseSingular}}.dto';
 import { ErrorHandler } from '../../utils/error.handler';
 import { FindOptionsWhere, Repository, ILike } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { {{classCase}} } from './entities/{{kebabCase}}.entity';
+import { {{classCaseSingular}} } from './entities/{{kebabCaseSingular}}.entity';
 import {
   PaginatedRequestInterface,
   PaginatedResponse,
-} from '../../models/paginated.interface';
+} from './paginated.interface';
 
-type CreateDtoClass = Create{{classCase}}Dto;
-type UpdateDtoClass = Update{{classCase}}Dto;
+type CreateDtoClass = Create{{classCaseSingular}}Dto;
+type UpdateDtoClass = Update{{classCaseSingular}}Dto;
 @Injectable()
-export class {{classCase}}Service {
-  private subjectName = '{{classCase}}';
+export class {{classCaseSingular}}Service {
+  private subjectName = '{{camelCaseSingular}}';
   constructor(
-    @InjectRepository({{classCase}})
-    private repository: Repository<{{classCase}}>,
+    @InjectRepository({{classCaseSingular}})
+    private repository: Repository<{{classCaseSingular}}>,
   ) {}
   async create(createDtoObject: CreateDtoClass) {
     if (createDtoObject.name) {
@@ -32,13 +32,13 @@ export class {{classCase}}Service {
       }
     }
 
-    const rowCreated: {{classCase}} = this.repository.create(createDtoObject);
+    const rowCreated: {{classCaseSingular}} = this.repository.create(createDtoObject);
 
     return this.repository.save(rowCreated);
   }
 
   async createMany(createDtoObjects: CreateDtoClass[]) {
-    const created: {{classCase}}[] = [];
+    const created: {{classCaseSingular}}[] = [];
     const nonCreated: { row: CreateDtoClass; error: any }[] = [];
 
     for (const dtoObject of createDtoObjects) {
@@ -74,7 +74,7 @@ export class {{classCase}}Service {
       newEntries.push([key, value]);
     });
 
-    const where: FindOptionsWhere<{{classCase}}>[] = newEntries.map(
+    const where: FindOptionsWhere<{{classCaseSingular}}>[] = newEntries.map(
       ([key, value]) => {
         return { [key]: ILike(`%${String(value).trim()}%`) };
       },
@@ -92,7 +92,7 @@ export class {{classCase}}Service {
     const pageSize = take;
     const pageIndex = Math.floor(skip / pageSize);
 
-    const paginatedResponse: PaginatedResponse<{{classCase}}> = {
+    const paginatedResponse: PaginatedResponse<{{classCaseSingular}}> = {
       dataSource,
       length,
       pageSize,

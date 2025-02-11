@@ -6,8 +6,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity()
-export class {{classCase}} {
+@Entity('{{classCasePlural}}')
+export class {{classCaseSingular}} {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

@@ -1,6 +1,6 @@
 import { IsString, IsNotEmpty } from 'class-validator';
 
-export class Create{{classCase}}Dto {
+export class Create{{classCaseSingular}}Dto {
   @IsString()
   @IsNotEmpty()
   name: string;
