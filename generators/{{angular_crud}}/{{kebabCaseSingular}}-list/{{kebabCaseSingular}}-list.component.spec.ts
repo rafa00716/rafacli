@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { {{classCaseSingular}}ListComponent } from './{{kebakebabCaseSingularbCase}}-list.component';
+import { {{classCaseSingular}}ListComponent } from './{{kebabCaseSingular}}-list.component';
 
 describe('{{classCaseSingular}}ListComponent', () => {
   let component: {{classCaseSingular}}ListComponent;

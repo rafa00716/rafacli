@@ -17,8 +17,6 @@ import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { CUSTOM_DATE_FORMATS } from '../../../utils/date-format';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { forkJoin } from 'rxjs';
-import { DatalayerService } from '../../../services/datalayer.service';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from '../../../shared/shared.module';
@@ -65,7 +63,6 @@ export class {{classCaseSingular}}OneComponent implements OnInit {
     private activateRouter: ActivatedRoute,
     private router: Router,
     private {{camelCaseSingular}}Service: {{classCaseSingular}}Service,
-    private datalayerService: DatalayerService
   ) {
     const param = this.activateRouter.snapshot.paramMap.get('id');
 

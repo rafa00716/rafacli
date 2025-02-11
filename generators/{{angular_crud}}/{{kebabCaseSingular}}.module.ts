@@ -1,14 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { {{camelCaseSingular}}RoutingModule } from './{{kebabCaseSingular}}-routing.module';
+import { {{classCaseSingular}}RoutingModule } from './{{kebabCaseSingular}}-routing.module';
 
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    {{camelCaseSingular}}RoutingModule
-  ]
+  imports: [CommonModule,{{classCaseSingular}}RoutingModule]
 })
-export class {{camelCaseSingular}}Module { }
+export class {{classCaseSingular}}Module { }

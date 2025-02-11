@@ -15,9 +15,7 @@ import { PaginatedRequestInterface } from './paginated.interface';
 
 @Controller('{{kebabCasePlural}}')
 export class {{classCaseSingular}}Controller {
-  constructor(
-    private readonly {{camelCaseSingular}}Service: {{classCaseSingular}}Service,
-  ) {}
+  constructor(private readonly {{camelCaseSingular}}Service: {{classCaseSingular}}Service) {}
 
   @Post()
   create(@Body() create{{classCaseSingular}}Dto: Create{{classCaseSingular}}Dto) {
