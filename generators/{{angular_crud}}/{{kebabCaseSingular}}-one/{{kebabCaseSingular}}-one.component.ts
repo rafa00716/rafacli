@@ -110,7 +110,7 @@ export class {{classCaseSingular}}OneComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['app/${this.entityPluralName}']);
+    this.router.navigate([`app/${this.entityPluralName}`]);
   }
 
   submit() {
