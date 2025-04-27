@@ -195,12 +195,12 @@ export class {{classCaseSingular}}ListComponent implements AfterViewInit {
   }
 
   createRow() {
-    this.router.navigate([`app/{{kebabCaseSingular}}/create`]);
+    this.router.navigate([`app/${this.entityPluralName}/create`]);
   }
 
   editRow(row: {{classCaseSingular}}Interface) {
     this.{{camelCaseSingular}}Selected = row.id;
-    this.router.navigate([`app/{{kebabCaseSingular}}/edit/${this.{{camelCaseSingular}}Selected}`]);
+    this.router.navigate([`app/${this.entityPluralName}/edit/${this.{{camelCaseSingular}}Selected}`]);
   }
 
   stripHtml(html: string): string {

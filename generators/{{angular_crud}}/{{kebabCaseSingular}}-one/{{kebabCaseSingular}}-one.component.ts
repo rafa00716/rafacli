@@ -58,6 +58,8 @@ export class {{classCaseSingular}}OneComponent implements OnInit {
   submiting = false;
   error = null;
   private _snackBar = inject(MatSnackBar);
+  entitySingularName = '{{camelCaseSingular}}';
+  entityPluralName = '{{camelCasePlural}}';
   constructor(
     private fb: FormBuilder,
     private activateRouter: ActivatedRoute,
@@ -65,15 +67,10 @@ export class {{classCaseSingular}}OneComponent implements OnInit {
     private {{camelCaseSingular}}Service: {{classCaseSingular}}Service,
   ) {
     const param = this.activateRouter.snapshot.paramMap.get('id');
-
+    this.{{camelCaseSingular}}Id = param ?? undefined;
     this.{{camelCaseSingular}}Form = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(50)]],
     });
-
-    if (param) {
-      this.{{camelCaseSingular}}Id = param;
-      this.load{{classCaseSingular}}();
-    }
   }
 
   loading() {
@@ -113,7 +110,7 @@ export class {{classCaseSingular}}OneComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['app/{{kebabCaseSingular}}']);
+    this.router.navigate(['app/${this.entityPluralName}']);
   }
 
   submit() {
@@ -146,7 +143,8 @@ export class {{classCaseSingular}}OneComponent implements OnInit {
     this.loadPreData();
 
     if (!this.isNew()) {
-      this.{{camelCaseSingular}}Form.controls['serviceId'].disable();
+      this.load{{classCaseSingular}}();
     }
+
   }
 }

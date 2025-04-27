@@ -34,13 +34,24 @@
         matSortDirection="desc" matSortActive="name">
         <!-- Id Column -->
         @for (col of displayedColumns; track $index) {
-        <ng-container [matColumnDef]="col">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{getColumnTitle(col)}}</th>
-            <td mat-cell *matCellDef="let row">
-                <span [innerHTML]="getColumnCellContent(col, row)"></span>
-            </td>
-        </ng-container>
-        }
+            @if (keysToSort.includes(col)) {
+            <ng-container [matColumnDef]="col">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{getColumnTitle(col)}}</th>
+                <td mat-cell *matCellDef="let row">
+                    <span [innerHTML]="getColumnCellContent(col, row)"></span>
+                </td>
+            </ng-container>
+    
+            } @else {
+            <ng-container [matColumnDef]="col">
+                <th mat-header-cell *matHeaderCellDef>{{getColumnTitle(col)}}</th>
+                <td mat-cell *matCellDef="let row">
+                    <span [innerHTML]="getColumnCellContent(col, row)"></span>
+                </td>
+            </ng-container>
+    
+            }
+            }
 
         <ng-container matColumnDef="expand">
             <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
