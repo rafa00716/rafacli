@@ -1,0 +1,445 @@
+@use "@angular/material" as mat;
+
+$bg-components: var(--mat-sys-surface);
+$text-input-color: var(--mdc-filled-text-field-input-text-color, var(--mat-app-on-surface));
+$dark-bg: rgb(61, 73, 90);
+$light-bg: rgb(211, 211, 211);
+$border-standard: 25px;
+$container-width-standard: 1080px;
+
+@include mat.elevation-classes();
+@include mat.app-background();
+
+@include mat.toolbar-overrides(
+    (
+        container-background-color: var(--mat-sys-primary-container),
+        container-text-color: var(--mat-sys-on-primary-container)
+    )
+);
+
+@include mat.table-overrides(
+    (
+        header-headline-color: var(--mat-sys-on-primary-container)
+    )
+);
+
+button {
+    &.warn {
+        @include mat.button-overrides(
+            (
+                filled-container-color: red,
+                filled-label-text-color: white
+            )
+        );
+    }
+}
+
+html {
+    color-scheme: light;
+    @include mat.theme(
+        (
+            color: mat.$azure-palette,
+            typography: Roboto,
+            density: -1
+        )
+    );
+
+    body {
+        background-color: $light-bg;
+        &.dark {
+            color-scheme: dark;
+            & {
+                background-color: $dark-bg;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6,
+            p,
+            .text {
+                color: rgb(214, 214, 214);
+            }
+
+            .container_table {
+                table {
+                    [mat-header-row] {
+                        border-bottom: solid gray 1px;
+                    }
+
+                    [mat-row],
+                    .mat-row {
+                        &:nth-child(even) {
+                            background-color: rgb(73, 94, 94);
+                        }
+
+                        &:hover {
+                            background-color: rgba(46, 49, 49, 0.315);
+                        }
+                    }
+                }
+            }
+        }
+
+        input {
+            color: $text-input-color;
+        }
+    }
+}
+
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.horizontal_spacer {
+    flex: 1 1 auto;
+}
+
+.w_full {
+    width: 100% !important;
+}
+.h_full {
+    height: 100vh !important;
+}
+
+.flex {
+    display: flex !important;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.between {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.center {
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.left {
+    justify-content: left !important;
+    align-items: center !important;
+}
+
+.text_center {
+    text-align: center !important;
+}
+
+.text_left {
+    text-align: left;
+}
+
+.text_right {
+    text-align: right;
+}
+
+.vertical {
+    flex-direction: column;
+}
+
+.horizontal {
+    flex-direction: row;
+}
+
+.pointer {
+    cursor: pointer;
+}
+.shadow-standard {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.border-standard {
+    border-radius: $border-standard !important;
+}
+
+.circle {
+    border-radius: 50%;
+}
+
+.wrap-grid {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos hagan wrap */
+    gap: 16px; /* Espacio entre elementos */
+    justify-content: space-between; /* Espacia los elementos uniformemente */
+}
+
+.wrap-grid > * {
+    flex: 1 1 calc(25% - 16px); /* Cada elemento ocupa un tercio del ancho */
+    box-sizing: border-box; /* Asegura que el padding y border no afecten el tamaño total */
+}
+
+.submit_cancel_buttons {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+        display: block;
+        margin: 12px 0;
+    }
+}
+
+.button_with_icon {
+    display: flex;
+    width: auto;
+    min-width: 211px !important;
+    mat-icon,
+    i,
+    .icon {
+        vertical-align: middle !important;
+        margin-left: 4px !important;
+        margin-right: 4px !important;
+    }
+}
+
+.full-width-table {
+    width: 100%;
+}
+
+.container_one {
+    max-width: $container-width-standard;
+    margin: 20px auto;
+    border-radius: $border-standard !important;
+
+    .form-field {
+        margin-bottom: 8px;
+        mat-form-field {
+            width: 100%;
+        }
+    }
+
+    .container_title {
+        padding: 16px;
+    }
+
+    @media (max-width: 768px) {
+        mat-form-field {
+            width: 100%;
+        }
+    }
+}
+
+.container_table {
+    padding: 8px;
+    border-radius: $border-standard;
+
+    .search {
+        border-radius: $border-standard;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px;
+        background-color: $bg-components;
+        input {
+            border: none;
+            border-radius: $border-standard;
+            background-color: $bg-components;
+            outline-style: none;
+            width: 50%;
+            margin-left: 16px;
+        }
+    }
+    .buttons_filters {
+        border-radius: $border-standard;
+        margin-bottom: 16px;
+        display: flex;
+        padding: 8px;
+        background-color: $bg-components;
+    }
+
+    table {
+        border-radius: $border-standard;
+        overflow-x: auto;
+        width: 100%;
+        max-width: 90vw;
+        tr,
+        th,
+        td {
+            border: none;
+            height: fit-content;
+            padding-bottom: 5px !important;
+            padding-top: 5px !important;
+        }
+
+        [mat-header-row] {
+            border-bottom: solid gray 1px;
+            background-color: var(--mat-sys-primary-container);
+            :first-child {
+                border-top-left-radius: $border-standard;
+            }
+
+            :last-child {
+                border-top-right-radius: $border-standard;
+            }
+        }
+
+        [mat-row],
+        .mat-row {
+            cursor: pointer;
+
+            &:last-child {
+                td:first-child {
+                    border-bottom-left-radius: $border-standard;
+                }
+
+                td:last-child {
+                    border-bottom-right-radius: $border-standard;
+                }
+            }
+
+            &:nth-last-child(2) {
+                td:first-child {
+                    border-bottom-left-radius: $border-standard;
+                }
+
+                td:last-child {
+                    border-bottom-right-radius: $border-standard;
+                }
+            }
+
+            &:nth-child(even) {
+                background-color: rgb(233, 240, 239);
+            }
+
+            &:hover {
+                background-color: rgb(202, 204, 204);
+            }
+
+            &.detail-row {
+                height: 0 !important;
+            }
+        }
+
+        .mat-mdc-no-data-row {
+            height: 64px;
+            width: 100%;
+            border-radius: $border-standard;
+            text-align: center;
+        }
+
+        .col-detail {
+            &:not(.expanded) {
+                padding: 0px !important;
+                height: 0px !important;
+                .element-detail {
+                    display: none;
+                }
+            }
+            .element-detail {
+                overflow: hidden;
+                display: flex;
+            }
+        }
+    }
+
+    mat-paginator {
+        margin-top: 8px;
+        border-radius: $border-standard;
+        min-height: none;
+    }
+}
+
+::ng-deep .mat-mdc-paginator-page-size-select .mat-mdc-notch-piece {
+    width: 64px !important;
+    height: 24px;
+    border: none;
+}
+
+::ng-deep .mat-mdc-paginator-container {
+    min-height: 0px !important;
+    flex-wrap: nowrap !important;
+}
+
+::ng-deep .mat-mdc-paginator-page-size-label {
+    @media (max-width: 767.98px) {
+        display: none;
+    }
+}
+
+@for $i from 0 through 20 {
+    .mg-#{$i} {
+        margin: #{$i * 4}px !important;
+    }
+    .mg-l-#{$i} {
+        margin-left: #{$i * 4}px !important;
+    }
+    .mg-r-#{$i} {
+        margin-right: #{$i * 4}px !important;
+    }
+    .mg-t-#{$i} {
+        margin-top: #{$i * 4}px !important;
+    }
+    .mg-b-#{$i} {
+        margin-bottom: #{$i * 4}px !important;
+    }
+}
+
+@for $i from 0 through 20 {
+    .pd-#{$i} {
+        padding: #{$i * 4}px;
+    }
+    .pd-l-#{$i} {
+        padding-left: #{$i * 4}px;
+    }
+    .pd-r-#{$i} {
+        padding-right: #{$i * 4}px;
+    }
+    .pd-t-#{$i} {
+        padding-top: #{$i * 4}px;
+    }
+    .pd-b-#{$i} {
+        padding-bottom: #{$i * 4}px;
+    }
+
+    .space-y-#{$i} {
+        > :nth-child(n) {
+            margin-top: #{$i * 2}px;
+            margin-bottom: #{$i * 2}px;
+        }
+    }
+
+    .space-x-#{$i} {
+        > :nth-child(n) {
+            margin-right: #{$i * 2}px;
+            margin-left: #{$i * 2}px;
+        }
+    }
+
+    .mg-y-#{$i} {
+        margin-top: #{$i * 2}px;
+        margin-bottom: #{$i * 2}px;
+    }
+    .pd-y-#{$i} {
+        padding-top: #{$i * 2}px;
+        padding-bottom: #{$i * 2}px;
+    }
+}
+
+@media (max-width: 768px) {
+    .wrap-grid > * {
+        flex: 1 1 calc(50% - 16px); /* Cambia a 2 columnas en pantallas medianas */
+    }
+
+    .submit_cancel_buttons {
+        flex-direction: column-reverse !important;
+        button {
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .wrap-grid > * {
+        flex: 1 1 100%; /* Cambia a 1 columna en pantallas pequeñas */
+    }
+}
