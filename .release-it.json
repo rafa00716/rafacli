@@ -11,9 +11,10 @@
   "github": {
     "release": true,
     "releaseName": "${version}",
+    "autoGenerate": true,
     "tokenRef": "${GITHUB_TOKEN}"
   },
   "npm": {
-    "publish": true
+    "publish": false
   }
 }
