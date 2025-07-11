@@ -1,5 +1,5 @@
-<mat-card>
-    <mat-card-title>{{isNew()? 'Create' : 'Edit'}} {{camelCaseSingular}}</mat-card-title>
+<mat-card class="container_one">
+    <mat-card-title class="container_title">{{isNew()? 'Create' : 'Edit'}} {{camelCaseSingular}}</mat-card-title>
     <mat-card-content>
         @if (error) {
         <app-error-loading></app-error-loading>

@@ -103,7 +103,7 @@
 
 <ng-template #detail>
     <mat-card *ngIf="expandedElement" class="w_full pd-2">
-        <mat-card-title>Detalle del {{entitySingularName}} {{expandedElement.name}}</mat-card-title>
+        <mat-card-subtitle>{{entitySingularName | titlecase }} detail {{expandedElement.name}}</mat-card-subtitle>
         <mat-card-content>
             <div class="flex wrap space-x-4">
                 <div class="mg-t-4" *ngFor="let property of getJsonRowDetail(expandedElement) | keyvalue : keepSort">

@@ -23,8 +23,7 @@ const generatorsEnables = [
   "angular_auth",
   "angular_crud",
   "nest_crud",
-  "angular_service",
-  "nest_service",
+  "styles_angular"
 ];
 
 const initTitleText = chalk.red(
@@ -90,7 +89,9 @@ const inquiries = () => {
 
 const run = async () => {
   init();
-  const { singularName, pluralName, generator_option, path } = await inquiries();
+  const { singularName, _pluralName, generator_option, path } = await inquiries();
+
+    let pluralName = _pluralName ?? singularName;
 
   copyAndModifyDir(
     `${__dirname}/generators/{{${generator_option}}}`,
@@ -111,10 +112,8 @@ const getLabel = (key) => {
       return "CRUD in Angular";
     case "nest_crud":
       return "CRUD in NestJS";
-    case "angular_service":
-      return "Service in Angular";
-    case "nest_service":
-      return "Service in NestJS";
+    case "styles_angular":
+      return "Styles in Angular";
     default:
       return "Unknown";
   }

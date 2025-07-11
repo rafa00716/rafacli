@@ -116,10 +116,6 @@ export class {{classCaseSingular}}OneComponent implements OnInit {
   submit() {
     const value = this.{{camelCaseSingular}}Form.value;
 
-    if (value.ci) {
-      value.ci = value.ci.trim().replace(/\./g, "");
-    }
-
     this.submiting = true;
     this.{{camelCaseSingular}}Form.disable();
 
